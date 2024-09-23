@@ -1,0 +1,45 @@
+@if(!gameStarted) {
+<div class="container2 container3">
+    <button class="start-game" (click)="startGame()">Start Game</button>
+
+</div>
+}
+
+@if(gameStarted && !gameOver) {
+
+
+<div class="container">
+    <div class="top-card">
+        <button (click)="giveUp()">Give up!</button>
+    </div>
+    <div class="top-card">
+        <h2>Questions Remaining</h2>
+        <p class="question">{{remainingNumbers}}</p>
+    </div>
+    <div class="top-card">
+        <h2>Score:</h2>
+        <p class="score">{{currentPosition}}/100</p>
+    </div>
+    <div class="top-card">
+        <h2>Timer</h2>
+        <p class="timer">{{ formattedTimeLeft }}</p>
+    </div>
+</div>
+
+<div class="container2">
+    @for(number of randomNumbers$; track number){
+    <div class="numbers" [ngClass]="getNumberClass(number)" (click)="selectNumber(number)">
+        <p>{{ number }}</p>
+    </div>}
+</div>
+}
+
+@if(gameOver) {
+<div class="container2 container3">
+    <div class="result">
+        <h2 [ngClass]="resultMessageClass">{{resultMessage}}</h2>
+        <p>Score: {{currentPosition}}</p>
+        <button (click)="startGame()">Start Again!</button>
+    </div>
+</div>
+}
